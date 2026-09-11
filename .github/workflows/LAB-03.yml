@@ -1,0 +1,35 @@
+name: push trigger workflow
+
+### A pipe vai executar em push após?
+
+on:
+  push:
+    branches:
+      - main
+      - versao 
+      - develop
+      - outras
+    paths:
+      - 'src/**' ###(é o caminho) deve ser criado o mesmo exemplo do curso 
+      - 'README.md' ### (é o arquivo  )deve ser  criado se for usado em real deve ser visto o paht verdadeiro 
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+
+    - name: informações do push 
+      run:
+        echo "Workflow disparado por PUSH"
+        echo "Commit: ${{ github.sha }}"
+        echo "Autor: ${{ github.actor }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Repositório: ${{ github.repository }}"
+
+    - name: Listar arquivos modificados
+      run: |
+        echo "Arquivos no repositório:"
+        ls -la
