@@ -25,7 +25,6 @@ jobs:
         echo "Autor: ${{ github.actor }}"
         echo "Branch: ${{ github.ref_name }}"
         echo "Repositório: ${{ github.repository }}"
-        echo "Repositório: ${{ github.repository }}"
     - name: Listar arquivos modificados
       run: |
         echo "Arquivos no repositório:"
