@@ -6,12 +6,9 @@ on:
   push:
     branches:
       - main
-      - versao 
-      - develop
-      - outras
-    paths:
-      - 'src/**' ###(é o caminho) deve ser criado o mesmo exemplo do curso 
-      - 'README.md' ### (é o arquivo  )deve ser  criado se for usado em real deve ser visto o paht verdadeiro 
+      - ajustedevops
+paths:
+  - '.github/workflows/**'
 
 jobs:
   push-job:
@@ -28,7 +25,7 @@ jobs:
         echo "Autor: ${{ github.actor }}"
         echo "Branch: ${{ github.ref_name }}"
         echo "Repositório: ${{ github.repository }}"
-
+        echo "Repositório: ${{ github.repository }}"
     - name: Listar arquivos modificados
       run: |
         echo "Arquivos no repositório:"
