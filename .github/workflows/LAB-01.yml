@@ -4,7 +4,10 @@ name: "Lab 01 - Estrutura de Diretórios e Arquivos"
 # Define quando o workflow será executado
 on:
   push:                    # Executa quando houver push
-    branches: [ main ]     # Apenas na branch main
+      branches:
+      - main
+      - ajustedevops
+      - devteste     # Apenas na branch main
   workflow_dispatch:       # Permite execução manual pela interface
 
 # Variáveis de ambiente globais do workflow
