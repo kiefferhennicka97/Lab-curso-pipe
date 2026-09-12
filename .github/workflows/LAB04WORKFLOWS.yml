@@ -1,31 +1,31 @@
-name: push trigger workflow
+##name: push trigger workflow
 
 ### A pipe vai executar em push após?
 
-on:
-  push:
-    branches:
-      - main
-      - ajustedevops
-paths:
-  - '.github/workflows/**'
+###on:
+ ### push:
+   ### branches:
+  ###    - main
+   ###   - ajustedevops
+###paths:
+ ### - '.github/workflows/**'
 
-jobs:
-  push-job:
-    runs-on: ubuntu-latest
+###jobs:
+  ###push-job:
+   ### runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout código
-      uses: actions/checkout@v4
+   ### steps:
+   ### - name: Checkout código
+   ###   uses: actions/checkout@v4
 
-    - name: informações do push 
-      run:
-        echo "Workflow disparado por PUSH"
-        echo "Commit: ${{ github.sha }}"
-        echo "Autor: ${{ github.actor }}"
-        echo "Branch: ${{ github.ref_name }}"
-        echo "Repositório: ${{ github.repository }}"
-    - name: Listar arquivos modificados
-      run: |
-        echo "Arquivos no repositório:"
-        ls -la
+   ### - name: informações do push 
+   ###   run:
+    ###    echo "Workflow disparado por PUSH"
+     ###   echo "Commit: ${{ github.sha }}"
+     ###   echo "Autor: ${{ github.actor }}"
+     ###   echo "Branch: ${{ github.ref_name }}"
+    ###    echo "Repositório: ${{ github.repository }}"
+    ###- name: Listar arquivos modificados
+    ###  run: |
+     ###   echo "Arquivos no repositório:"
+    ###    ls -la
