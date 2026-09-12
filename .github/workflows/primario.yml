@@ -1,0 +1,36 @@
+name: push trigger workflow
+
+on:
+  # Dispara manualmente pela interface web (GitHub → Actions → Run workflow)
+  workflow_dispatch:
+
+  # Dispara automaticamente em push nas branches main e admin
+  push:
+    branches:
+      - main
+      - admin
+    # Se quiser que rode em QUALQUER arquivo, basta remover "paths"
+    # ou usar o curinga "**"
+    paths:
+      - '**'
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+
+    - name: Informações do push
+      run: |
+        echo "Workflow disparado por PUSH ou manual"
+        echo "Commit: ${{ github.sha }}"
+        echo "Autor: ${{ github.actor }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Repositório: ${{ github.repository }}"
+
+    - name: Listar arquivos modificados
+      run: |
+        echo "Arquivos no repositório:"
+        ls -la

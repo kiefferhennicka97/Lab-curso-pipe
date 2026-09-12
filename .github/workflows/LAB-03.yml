@@ -6,13 +6,14 @@ on:
   push:
     branches:
       - main
-      - versao 
       - develop
-      - outras
+      - admin
     paths:
-      - 'src/**' ###(é o caminho) deve ser criado o mesmo exemplo do curso 
+      - '~/labs/Lab-curso-pipe**' ###(é o caminho) deve ser criado o mesmo exemplo do curso 
       - 'README.md' ### (é o arquivo  )deve ser  criado se for usado em real deve ser visto o paht verdadeiro 
-      - 'testeloren.txt' #
+      - 'testeloren.txt' # quando houver edição deste arquivo o mesmo podera sofre alterazçãoes e commit
+  workflow_dispatch:
+  
 jobs:
   push-job:
     runs-on: ubuntu-latest
