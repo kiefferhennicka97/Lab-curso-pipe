@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, linux, dev]   # exemplo de labels do servidor
+    runs-on: self-hosted # exemplo de labels do servidor
     steps:
       - name: Checkout código em ~/Lab01
         uses: actions/checkout@v3
