@@ -24,4 +24,4 @@ jobs:
         run: node -v && npm -v
         
       - name: Mensagem de finalização
-        run: echo "✅ Pipeline finalizado com sucesso!, curso de github complete"
+        run: echo "✅ Pipeline finalizado com sucesso!, curso de github estudos com suscesso"
