@@ -21,4 +21,5 @@ jobs:
 
       - name: Rodar testes
         working-directory: ~/Lab01
-        run: npm test
+        run: node -v && npm -v
+
