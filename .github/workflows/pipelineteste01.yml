@@ -16,7 +16,8 @@ jobs:
 
       - name: Instalar dependências
         working-directory: ~/Lab01
-        run: npm install
+        run: sudo apt install nodejs npm -y && sudo apt update
+
 
       - name: Rodar testes
         working-directory: ~/Lab01
