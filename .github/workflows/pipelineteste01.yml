@@ -22,4 +22,6 @@ jobs:
       - name: Rodar testes
         working-directory: ~/Lab01
         run: node -v && npm -v
-
+        
+      - name: Mensagem de finalização
+        run: echo "✅ Pipeline finalizado com sucesso!, curso de github complete"
