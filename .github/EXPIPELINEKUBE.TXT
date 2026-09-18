@@ -1,0 +1,71 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:   # execução manual
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Rodando CI (lint, build, testes unitários)"
+
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Rodando CD (deploy, push de imagem)"
+
+  k8s-matrix:
+    # aqui você define que vai rodar no runner self-hosted
+    runs-on: self-hosted
+    needs: [ci, cd]
+    strategy:
+      matrix:
+        db: [mysql, postgres, sqlite]
+        k8s_version: [1.24.0, 1.25.0]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: ${{ matrix.k8s_version }}
+
+      - name: Configure kubeconfig
+        run: |
+          echo "$KUBECONFIG_CONTENT" > $HOME/.kube/config
+
+      - name: Deploy database pod
+        run: |
+          kubectl apply -f k8s/db/${{ matrix.db }}.yaml
+          kubectl rollout status deployment/${{ matrix.db }}-db
+
+      - name: Deploy application
+        run: |
+          kubectl apply -f k8s/app/deployment.yaml
+          kubectl rollout status deployment/myapp
+
+      - name: Run integration tests
+        run: |
+          kubectl exec deploy/myapp -- npm run test:integration -- --db ${{ matrix.db }}
+
+      - name: Cleanup
+        if: always()
+        run: |
+          kubectl delete -f k8s/db/${{ matrix.db }}.yaml
+          kubectl delete -f k8s/app/deployment.yaml
+
+
+
+
+# job k8s-matrix agora usa runs-on: self-hosted.
+
+#Isso significa que ele não vai rodar nos runners do GitHub, mas sim no runner que você registrou (sua VM, servidor ou máquina local).
+
+#Continua sendo manual (workflow_dispatch), então você dispara quando quiser.
